@@ -1,9 +1,76 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
   <head>
-    <meta charset="UTF-8" />
+    <title>TODOapp(JS)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JS Todoアプリ</title>
+    <meta charset="UTF-8" />
   </head>
-  <body></body>
+
+  <body>
+    <!-- タイトル表示 -->
+    <h1 class="title-todo">JS Todoリスト</h1>
+
+    <!-- ラジオボタン -->
+    <input
+      type="radio"
+      id="contactChoice1"
+      name="contact"
+      value="email"
+      checked="checked"
+    />
+    <label for="contactChoice1">すべて</label>
+
+    <input type="radio" id="contactChoice2" name="contact" value="phone" />
+    <label for="contactChoice2">作業中</label>
+
+    <input type="radio" id="contactChoice3" name="contact" value="mail" />
+    <label for="contactChoice3">完了</label>
+
+    <!-- table部分 -->
+    <table class="table-taskcheck">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">タスク名</th>
+          <th scope="col">期限</th>
+          <th scope="col">状態</th>
+          <th scope="col">削除</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>JavaScriptの基礎</td>
+          <td>2024-01-01</td>
+          <td><button class="btn-taskcheck">作業中</button></td>
+          <td><button class="btn-taskcheck">✕</button></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>非同期処理</td>
+          <td>2024-12-31</td>
+          <td><button class="btn-taskcheck">作業中</button></td>
+          <td><button class="btn-taskcheck">✕</button></td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>オブジェクト指向</td>
+          <td>2025-01-01</td>
+          <td><button class="btn-taskcheck">作業中</button></td>
+          <td><button class="btn-taskcheck">✕</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 入力フォーム -->
+    <input type="text" placeholder="タスク名を入力" />
+
+    <!-- 日付入力 -->
+    <label><input type="date" /></label>
+
+    <!-- 追加ボタン -->
+    <button class="btn-add">追加</button>
+
+    <script src="js/index.js"></script>
+  </body>
 </html>
