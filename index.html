@@ -37,8 +37,8 @@
           <th scope="col">削除</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
+      <tbody id="todoList">
+        <!-- <tr>
           <th scope="row">1</th>
           <td>JavaScriptの基礎</td>
           <td>2024-01-01</td>
@@ -58,18 +58,18 @@
           <td>2025-01-01</td>
           <td><button class="btn-taskcheck">作業中</button></td>
           <td><button class="btn-taskcheck">✕</button></td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
 
     <!-- 入力フォーム -->
-    <input type="text" placeholder="タスク名を入力" />
+    <input id="taskName" type="text" placeholder="タスク名を入力" />
 
     <!-- 日付入力 -->
-    <label><input type="date" /></label>
+    <label><input id="taskDate" type="date" /></label>
 
     <!-- 追加ボタン -->
-    <button class="btn-add">追加</button>
+    <button id="btn-add">追加</button>
 
     <script src="js/index.js"></script>
   </body>
