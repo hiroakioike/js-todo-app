@@ -46,7 +46,7 @@ const displayTodoList = () => {
     // todoList.map((todo) => {
     // for (const todo of todoList) {
     // for (let i = 0; i < todoList.length; i++) {
-    //   const todo = todoList[i];""
+    //   const todo = todoList[i];
 
     // 2-2. <tr>要素を生成
     const trElement = document.createElement("tr");
@@ -87,7 +87,6 @@ const displayTodoList = () => {
       todo.status = todo.status === "作業中" ? "完了" : "作業中";
 
       displayTodoList();
-      console.log(todoList);
     });
 
     // del-1.削除ボタンを表示する
