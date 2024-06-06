@@ -46,7 +46,7 @@ const displayTodoList = () => {
     // todoList.map((todo) => {
     // for (const todo of todoList) {
     // for (let i = 0; i < todoList.length; i++) {
-    //   const todo = todoList[i];
+    //   const todo = todoList[i];""
 
     // 2-2. <tr>要素を生成
     const trElement = document.createElement("tr");
@@ -56,27 +56,50 @@ const displayTodoList = () => {
     const taskNameElement = document.createElement("td");
     const limitElement = document.createElement("td");
     const statusElement = document.createElement("td");
+    const statusButton = document.createElement("button");
 
-    // 2-4. <td>要素の中にtodoListの0番目のデータを表示する
+    // 2-4. <td>要素の中にtodoListのｎ番目のデータを表示する
     idElement.textContent = index + 1;
     taskNameElement.textContent = todo.taskName;
     limitElement.textContent = todo.limit;
-    statusElement.textContent = todo.status;
+    statusButton.textContent = todo.status;
 
     // 2-5. <tr>要素の中に<td>要素を追加
     trElement.appendChild(idElement);
     trElement.appendChild(taskNameElement);
     trElement.appendChild(limitElement);
     trElement.appendChild(statusElement);
+    statusElement.appendChild(statusButton);
+    // comp-1.作業中のボタンを作成する
+    // comp-2.作業中ボタンを押すと完了のデータが出せるようにする
+    // comp-3.ボタンの表示を完了に切り替えられる
+    // comp-4.完了ボタンから作業中ボタンにも表示とデータを切り替えられるようにする
+    statusButton.addEventListener("click", () => {
+      // if文での書き方
+      // if (todo.status === "作業中") {
+      //   todo.status = "完了";
+      // } else {
+      //   todo.status = "作業中";
+      // }
+
+      // 三項演算子
+      // 条件式 ? true : false
+      todo.status = todo.status === "作業中" ? "完了" : "作業中";
+
+      displayTodoList();
+      console.log(todoList);
+    });
 
     // del-1.削除ボタンを表示する
+    const deleteElement = document.createElement("td");
     const deleteBtnElement = document.createElement("button");
     deleteBtnElement.textContent = "✕";
-    trElement.appendChild(deleteBtnElement);
+    trElement.appendChild(deleteElement);
+    deleteElement.appendChild(deleteBtnElement);
 
     // del-2.ボタンを押したIDのコンソールログが表示される
     deleteBtnElement.addEventListener("click", () => {
-      // del-3.IDと一致するタスクをデータ上で削除できる()
+      // del-3.IDと一致するタスクをデータ上で削除できる
       const target = todoList.findIndex((item) => {
         return item.id === todo.id;
       });
