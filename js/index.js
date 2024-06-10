@@ -94,10 +94,6 @@ const displayTodoList = () => {
     trElement.appendChild(limitElement);
     trElement.appendChild(statusElement);
     statusElement.appendChild(statusButton);
-    // comp-1.作業中のボタンを作成する
-    // comp-2.作業中ボタンを押すと完了のデータが出せるようにする
-    // comp-3.ボタンの表示を完了に切り替えられる
-    // comp-4.完了ボタンから作業中ボタンにも表示とデータを切り替えられるようにする
     statusButton.addEventListener("click", () => {
       // if文での書き方
       // if (todo.status === PROGRESS) {
@@ -137,24 +133,52 @@ const displayTodoList = () => {
 
 displayTodoList();
 
-// 1.追加ボタン押したらconsole吐き出す
-// 2.追加ボタン押したら配列にデータ追加（コンソールでわかればOK）
-// 3.追加ボタン押したら配列にデータ追加してHTMLに表示
-// 4.追加ボタン押したら入力フォームに入力された文字列がコンソールに表示
-// 5.タスク名でHTMLに表示される
-const addBtn = document.getElementById("btn-add");
-addBtn.addEventListener("click", () => {
+// 追加ボタン
+const addTodo = () => {
   const taskNameElement = document.getElementById("taskName");
   const taskDateElement = document.getElementById("taskDate");
+
+  // 入力が空の場合、アラートを表示して処理を中断する
+  // !は論理否定演算子、真値を取ると偽地になる
+  // trimは元の文字列からスペース取り除き、変更せずに新しい文字列を返す
+  if (!taskNameElement.value.trim() || !taskDateElement.value.trim()) {
+    alert("タスク名と期限を入力してください");
+    return;
+  }
+
+  // ラジオボタンに合わせて追加したタスクも状態が変わる
+  const getSelectedValue = () => {
+    const radioBtns = document.getElementsByName("radio");
+    for (const radioBtn of radioBtns) {
+      if (radioBtn.checked) {
+        return radioBtn.value;
+      }
+    }
+  };
+  const selectedValue = getSelectedValue();
 
   todoList.push({
     id: randomString(),
     taskName: taskNameElement.value,
     limit: taskDateElement.value,
-    status: PROGRESS,
+    status: selectedValue,
   });
 
+  taskNameElement.value = "";
+  taskDateElement.value = "";
+
   displayTodoList();
+};
+
+const addBtn = document.getElementById("btn-add");
+addBtn.addEventListener("click", addTodo);
+
+// キーボードショートカットを設定
+// metaKeyは⌘、ctrlはwindows、||はまたは
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) {
+    addTodo();
+  }
 });
 
 // ラジオボタンを切り替えた時に再度表示
