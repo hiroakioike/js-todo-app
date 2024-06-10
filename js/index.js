@@ -1,3 +1,6 @@
+const ALL = "すべて";
+const PROGRESS = "作業中";
+const DONE = "完了";
 /**
  * del idは6桁のランダムな文字列を生成する
  * Math.random()で0以上1未満のランダムな数値を生成
@@ -13,19 +16,19 @@ const todoList = [
     id: randomString(), // IDを数字ではなく6桁のランダムな文字列にする
     taskName: "JavaScriptの基礎",
     limit: "2024-01-01",
-    status: "作業中",
+    status: PROGRESS,
   },
   {
     id: randomString(),
     taskName: "非同期処理",
     limit: "2024-12-31",
-    status: "作業中",
+    status: PROGRESS,
   },
   {
     id: randomString(),
     taskName: "スプラトゥーンやる",
     limit: "2025-01-01",
-    status: "作業中",
+    status: PROGRESS,
   },
 ];
 
@@ -49,8 +52,7 @@ const displayTodoList = () => {
     (todo) => todo.status === selectedValue
   );
   // 三項演算子にて2-1でforEachするものをすべてか否か判定
-  const outputTodoList =
-    selectedValue === "すべて" ? todoList : filterdTodoList;
+  const outputTodoList = selectedValue === ALL ? todoList : filterdTodoList;
 
   // 1. HTMLのどの場所に表示するかを取得する
   // tbody要素を取得
@@ -98,15 +100,15 @@ const displayTodoList = () => {
     // comp-4.完了ボタンから作業中ボタンにも表示とデータを切り替えられるようにする
     statusButton.addEventListener("click", () => {
       // if文での書き方
-      // if (todo.status === "作業中") {
-      //   todo.status = "完了";
+      // if (todo.status === PROGRESS) {
+      //   todo.status = DONE;
       // } else {
-      //   todo.status = "作業中";
+      //   todo.status = PROGRESS;
       // }
 
       // 三項演算子
       // 条件式 ? true : false
-      todo.status = todo.status === "作業中" ? "完了" : "作業中";
+      todo.status = todo.status === PROGRESS ? DONE : PROGRESS;
 
       displayTodoList();
     });
@@ -149,7 +151,7 @@ addBtn.addEventListener("click", () => {
     id: randomString(),
     taskName: taskNameElement.value,
     limit: taskDateElement.value,
-    status: "作業中",
+    status: PROGRESS,
   });
 
   displayTodoList();
