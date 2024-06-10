@@ -31,7 +31,28 @@ const todoList = [
 
 // JSファイルが読み込まれたときにtodoListをHTMLに表示する
 const displayTodoList = () => {
-  //   1. HTMLのどの場所に表示するかを取得する
+  // ディスプレイの中でラジオボタンの状態に合わせてそれぞれ表示する
+  // 更新した時のラジオボタンの状態に合わせて表示する
+  const getSelectedValue = () => {
+    const radioBtns = document.getElementsByName("radio");
+    for (const radioBtn of radioBtns) {
+      if (radioBtn.checked) {
+        return radioBtn.value;
+      }
+    }
+  };
+  const selectedValue = getSelectedValue();
+
+  // どんな状態でも作業中だけを表示したい
+  // filterは指定した配列から指定した関数に合格する要素を抽出
+  const filterdTodoList = todoList.filter(
+    (todo) => todo.status === selectedValue
+  );
+  // 三項演算子にて2-1でforEachするものをすべてか否か判定
+  const outputTodoList =
+    selectedValue === "すべて" ? todoList : filterdTodoList;
+
+  // 1. HTMLのどの場所に表示するかを取得する
   // tbody要素を取得
   const todoListElement = document.getElementById("todoList");
 
@@ -39,9 +60,10 @@ const displayTodoList = () => {
   while (todoListElement.firstChild) {
     todoListElement.removeChild(todoListElement.firstChild);
   }
-  // // 2. 表示したいHTMLの形式に合わせてDOM要素を生成する
-  // // 2-1. todoListの0,1,2番目のデータを取得
-  todoList.forEach((todo, index) => {
+  // 2. 表示したいHTMLの形式に合わせてDOM要素を生成する
+  // 2-1. todoListの0,1,2番目のデータを取得
+  // forEachは配列の各要素に一度ずつ実行
+  outputTodoList.forEach((todo, index) => {
     // 他の書き方
     // todoList.map((todo) => {
     // for (const todo of todoList) {
@@ -131,4 +153,11 @@ addBtn.addEventListener("click", () => {
   });
 
   displayTodoList();
+});
+
+// ラジオボタンを切り替えた時に再度表示
+// 引数１はイベント名、引数２は実行する関数
+const radioBtns = document.getElementsByName("radio");
+radioBtns.forEach((radioBtn) => {
+  radioBtn.addEventListener("change", displayTodoList);
 });
